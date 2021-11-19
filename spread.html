@@ -1,0 +1,9 @@
+<script>
+  const log = console.log;
+
+  //전개연산자도 iterable/iterator 프로토콜을 따르고 있기 때문에 이 부분을 건들면 작동하지 않는다.
+  const a = [1,2];
+  a[Symbol.iterator]() = null;
+  log([...a, ...[3,4]]);
+
+</script>
