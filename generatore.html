@@ -1,0 +1,20 @@
+<script>
+  const log = console.log;
+
+  //제너레이터 : 이터레이터이자 이터러블을 생성하는 함수
+  //제너레이터는 문장을 통해 순회할 수 있는 값을 만들고. 이는 어떠한 값도
+  //순회할 수 있는 형태로 조작이 가능하다는 말.
+  function *gen() {
+    yield 1;
+    if(true) yield 2;
+    yield 3;
+  }
+
+  let iter= gen(); 
+  log(iter[Symbol.iterator]() == iter);
+  log(iter.next());
+  log(iter.next());
+  log(iter.next());
+
+
+</script>
