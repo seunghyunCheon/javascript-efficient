@@ -19,6 +19,32 @@
   //이터레이터 : {value, done} 객체를 리턴하는 next()를 가진 값.
   //이터레이터/이터러블 프로토콜 : 이터러블을 for...of, 전개 연산자 등과 함께 동작하도록 한 규약.
 
+  const iterable = {
+    [Symbol.iterator]() {
+      let i =3;
+      return {
+        next(){
+          return i==0 ? {done : true} : {value :i--, done:false}
+        },
+        [Symbol.iterator](){return this;}
+      }
+    }
+  }
+  //iterable : Symbol.iterator를 가지고 있는 값.
+
+  let iterator = iterable[Symbol.iterator]();
+  log(iterator);
+  log(iterator.next());
+  log(iterator.next());
+  for (const a of iterator) log(a);
+
+  const arr2 = [1,2,3];
+  let iter2 = arr2[Symbol.iterator]();
+  log(iter2[Symbol.iterator]() == iter2); //well-formed iterator.
+
+  for (const a of document.querySelectorAll("*")) log(a);
+  const all = document.querySelectorAll("*"); //queryselectorall로 받은게 iterable이다.
+  log(all[Symbol.iterator]);
 
 
 </script>
