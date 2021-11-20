@@ -1,0 +1,16 @@
+<script src="fx.js"></script>
+
+<script>
+  const queryStr = pipe(
+    Object.entries,
+    map(([k,v])=>`${k}=${v}`),
+    reduce((a, b)=> `${a}&${b}`),
+    log
+    );
+  log(queryStr({limit : 10, offset : 10, type: 'notice'}));
+
+  
+
+
+
+</script>
