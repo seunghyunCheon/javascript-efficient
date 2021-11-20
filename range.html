@@ -34,4 +34,33 @@
   test('L.range', 10, ()=> reduce(add,L.range(1000000)));
   //L.range는 바로 yield를 해주고 range는 배열에 push한 뒤에 for에서 이터레이터로 변환하고 하기에 더 오래걸린다.
 
+
+  const take = curry((l, iter) => {
+    let res = [];
+    for (const a of iter) {
+      res.push(a);
+      if(res.length == l) return res;
+    }
+    return res;
+  })
+
+
+  console.clear();
+  
+  log(
+    go(
+      L.range(100000),
+      take(9),
+      reduce(add),
+      log));
+
+  console.time();
+  log(take(5, range(100000)));
+  console.timeEnd();
+  console.time();
+  log(take(5, L.range(Infinity))); // 훨씬 효율적. 
+  console.timeEnd();
+
+
+
 </script>
