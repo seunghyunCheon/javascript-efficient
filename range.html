@@ -24,4 +24,14 @@
 
   log(reduce(add, list));
 
+  function test(name, time, f) {
+    console.time(name);
+    while(time--) f();
+    console.timeEnd(name);
+  }
+
+  test('range', 10, ()=> reduce(add,range(1000000)));
+  test('L.range', 10, ()=> reduce(add,L.range(1000000)));
+  //L.range는 바로 yield를 해주고 range는 배열에 push한 뒤에 for에서 이터레이터로 변환하고 하기에 더 오래걸린다.
+
 </script>
