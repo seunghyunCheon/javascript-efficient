@@ -1,0 +1,55 @@
+<script src="fx.js"></script>
+
+<script>
+
+  const products = [
+  { name: '반팔티', price: 15000},
+  { name: '긴팔티', price: 20000},
+  { name: '핸드폰케이스', price: 15000},
+  { name: '후드티', price: 30000},
+  { name: '바지', price: 25000}
+];
+
+  go(
+    0,
+    a=>a+1,
+    a=>a+10,
+    a=>a+100,
+    log);
+
+  const f = pipe( //pipe함수는 합수들이 합성된 형태를 리턴하는 것.
+    (a,b) => a+b,
+    a=>a+1,
+    a=>a+10,
+    a=>a+100
+  );
+
+  log(f(0,1));
+  const base_total_price = predi => pipe(
+    filter(predi),
+    total_price,
+  )
+
+  const total_price = pipe( //함수들을 넣었을 뿐이다.
+    map(p=>p.price),
+    reduce(add),
+  )
+
+  go(
+    products,
+    base_total_price(p=>p.price<20000),
+    log
+  );   
+
+
+
+  //curry는 함수의 표현력을 높이기 위해 사용된다. 혹은 함수인자가 공통적으로 쓰이는 부분이 있을때 재사용성을 높이기위해 사용된다.
+  //원하는 시점에 함수를 평가시킬때 사용!.
+  
+  const mult = curry((a,b)=>a*b);
+  const mult3 = mult(3);
+  log(mult3(4));
+
+
+
+</script>
