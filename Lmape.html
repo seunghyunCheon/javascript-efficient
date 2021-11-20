@@ -1,0 +1,16 @@
+<script src="fx.js"></script>
+
+<script>
+  L.map = function *(f,iter) {
+    for (const a of iter) yield f(a);
+  };
+
+  L.filter = function *(f, iter) {
+    for (const a of iter) if(f(a)) yield a;
+  };
+
+  var it = L.filter(a=>a%2, [1,2,3,4]);
+  log(it.next());
+
+
+</script>
