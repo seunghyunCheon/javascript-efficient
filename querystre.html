@@ -1,16 +1,30 @@
 <script src="fx.js"></script>
 
 <script>
+
+  L.entries = function *(obj) {
+    for (const k in obj) yield [k, obj[k]]; //k는 여기서 limit.
+  }
+
+  const join = curry((sep, iter) =>  //이터러블 프로토콜을 따르는 join함수. => 지연성 가능.
+    reduce((a,b) => `${a}${sep}${b}`, iter));
+
+
   const queryStr = pipe(
-    Object.entries,
-    map(([k,v])=>`${k}=${v}`),
-    reduce((a, b)=> `${a}&${b}`),
-    log
+    L.entries,
+    L.map(([k,v])=>`${k}=${v}`),
+    join('&')
     );
   log(queryStr({limit : 10, offset : 10, type: 'notice'}));
-
   
+  function *a() {
+    yield 10;
+    yield 11;
+    yield 12;
+    yield 13;
+  }
 
 
+  log(join(' - ', a()));
 
 </script>
