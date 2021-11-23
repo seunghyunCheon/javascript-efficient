@@ -1,0 +1,24 @@
+<script src="fx.js"></script>
+<script>
+
+  function add10(a, callback) {
+    setTimeout(()=> callback(a+10),100);
+  }
+
+
+  add10(5, res=> log(res));
+
+//프로미스는 연산이 끝날때 호출하는 콜백함수를 받지않고 인자만 받는다.
+
+//프로미스는 return이 중요하다.
+  function add20(a) {
+    return new Promise(resolve=> setTimeout(()=>resolve(a+20),100));
+  }
+
+  //promise는 순차적으로 보기좋게 연결지어 사용할수있다.
+  add20(5)
+    .then(add20)
+    .then(add20)
+    .then(log);
+
+</script>
