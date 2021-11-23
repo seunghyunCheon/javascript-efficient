@@ -3,18 +3,13 @@
 <script>
 
 
-  go([1,2,3,4,5,6],
-    L.map(a=> Promise.resolve(a*a)),
-    L.filter(a=> {
-      log(a);
-      return a%2;
-    }),
-    L.map(a=> {
-      log(a);
-      return a*a;
-    }),
-    take(4),
-    log);
+  
+
+    go([1,2,3,4],
+      L.map(a=> Promise.resolve(a*a)),
+      L.filter(a=>a % 2),
+      reduce(add),
+      log);
 
   
 </script>
