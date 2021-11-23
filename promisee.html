@@ -1,7 +1,5 @@
 <script src="fx.js"></script>
 <script>
-
-  const go1 = (a,f) => a instanceof Promise ? a.then(f) : f(a);
   const add5 = a => a+5;
 
   const delay100 = a => new Promise(
@@ -45,9 +43,14 @@
   const fg = id => Promise.resolve(id).then(g).then(f).catch(a=>a);
   const r = fg(2);
   fg(2).then();
+  
   // users.pop(); //상황에서따라 에러가 날 수 있다.
   // users.pop();
   // log(r);
-  
+  go(Promise.resolve(1),
+      a=> a+10,
+      a=> a+100,
+      a=> Promise.resolve(a+100),
+      log);
 
   </script>
