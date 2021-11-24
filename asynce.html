@@ -1,0 +1,24 @@
+<script src="fx.js"></script>
+<script>
+
+//함수를 await하기 위해서는 그 함수가 반드시 promise를 리턴해야한다. 
+//함수앞에 async가 붙은건 promise를 리턴한다는 뜻.
+  
+  function delay(time) {
+    return new Promise(resolve => setTimeout(()=>resolve(), time))
+  };
+
+  async function delayIdentity(a) {
+    await delay(500);
+    return a;
+  }
+
+  async function f1() {
+    const a = await delayIdentity(10);
+    const b = await delayIdentity(5);
+    return a+b;
+  }
+  
+  go(f1(), log);
+
+</script>
