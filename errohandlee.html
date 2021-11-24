@@ -1,0 +1,22 @@
+<script src="fx.js"></script>
+<script>
+
+  //동기상황에서 에러처리는 try catch문으로 하면된다. 이는 인자를 받아오는 부분 혹은
+  //try 내부에서 일어난 오류 둘 다 catch문에서 하나의 콜스택에서 일어나기에 다룰 수 있다.
+
+  //비동기에서의 애러핸들링.
+   async function f9(list) {
+     try{
+       return await Promise.reject('hi~~'); //Promise.reject인 형태로 await되어야 catch문으로 이동가능하다.
+     }catch(e) {
+       log(e);
+       return [];
+     }
+   }
+
+   //에러핸들링도 go함수 내부에 L및 take를 사용함으로써 원하는 부분까지만 에러핸들링이 가능하다.
+   //이러한 에러핸들링이 잘 되는 이유는 파이프라인이 함수합성을 안전하게 하고 있기때문이다. (promise들이 안전하게 reject가 됨.)
+   f9(['0','1','2','{']).then(a=>log(a, 'f9'));
+
+
+</script>
