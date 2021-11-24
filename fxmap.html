@@ -1,0 +1,32 @@
+<script src="fx.js"></script>
+
+<script>
+
+  async function delayI(a) {
+    return new Promise(resolve => setTimeout(()=>resolve(a), 100));
+  }
+
+  async function f2() {
+    const list = [1,2,3,4];
+    //기존 Array.prototype.map은 promise를 제어할 수 없다. 즉 프로미스가 풀어지지 않는다.
+    const res = await list.map(async a=> await delayI(a*a));
+    log(res);
+  }
+
+   function f3() {
+    const list = [1,2,3,4];
+    const res =  map(a=> delayI(a*a), list); //Promise들이 array형태로 있는것이 아닌 Promise하나가 Array형태로 값을 가지고 있음.
+    log(res);
+  }
+
+  f2();
+
+  f3();
+
+  function f4() {
+    return map(a=> delayI(a*a), [1,2,3,4]);
+  }
+
+  f4().then(log);
+
+</script>
